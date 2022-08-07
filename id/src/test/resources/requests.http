@@ -1,0 +1,72 @@
+### auth.auth
+POST http://localhost:8080/auth
+Content-Type: application/json
+
+{
+  "login": "vasya",
+  "password": "password"
+}
+
+> {% client.global.set("token", response.body.token); %}
+
+### auth.verify
+POST http://localhost:8080/auth/verify
+X-Token: rzl00lRt66/pTUrCCYSeRdzRaQKfz9ZZV5q63NIafNy4Wn6YvsekXRHeqIXJst+5nQn+HU1iWE0E/PoZ
+Content-Type: application/json
+
+{
+  "token": "{{token}}"
+}
+
+### auth.verify
+POST http://localhost:8080/auth/verify
+X-Token: {{token}}
+Content-Type: application/json
+
+{
+  "token": "{{token}}"
+}
+
+### users.getAll
+GET http://localhost:8080/users
+X-Token: {{token}}
+
+### users.getById
+GET http://localhost:8080/users/1
+X-Login: vasya
+X-Password: password
+
+### users.create
+POST http://localhost:8080/users
+X-Login: vasya
+X-Password: password
+Content-Type: application/json
+
+{
+  "id": 0,
+  "login": "vadmin",
+  "password": "password",
+  "roles": ["ROLE_ADMIN"]
+}
+
+### users.update
+PUT http://localhost:8080/users
+X-Login: vasya
+X-Password: password
+Content-Type: application/json
+
+{
+  "id": 3,
+  "login": "vanya",
+  "password": "top-password",
+  "roles": ["ROLE_USER", "ROLE_ADMIN"]
+}
+
+### users.deleteById
+DELETE http://localhost:8080/users/2
+X-Login: vasya
+X-Password: password
+
+### music.test
+GET http://localhost:8081/music
+X-Token: {{token}}

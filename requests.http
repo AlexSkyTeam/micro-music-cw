@@ -1,0 +1,14 @@
+### id.auth
+POST http://localhost:8001/auth
+Content-Type: application/json
+
+{
+  "login": "vasya",
+  "password": "password"
+}
+
+> {% client.global.set("token", response.body.token); %}
+
+### music.test
+GET http://localhost:8002/music
+X-Token: {{token}}
